@@ -1,0 +1,18 @@
+# interactive pyton notebooks ipynbs
+
+version: "3.0"
+
+services:
+  pytorch-script:
+    image: pytorch-script
+    build: .
+    ipc: host
+    ports:
+      - 8888:8888
+    volumes:
+      - ./ipynbs:/workspace/ipynbs
+      - ./data:/workspace/data
+      - ./outputs:/workspace/outputs
+
+    #command: python main.py
+    command: jupyter notebook --allow-root --ip=0.0.0.0 --no-browser --NotebookApp.token=abc123
